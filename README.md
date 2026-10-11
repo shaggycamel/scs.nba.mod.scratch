@@ -24,7 +24,14 @@ uv run python scripts/06_incentive.py  # does the team's playoff position move r
 uv run python scripts/07_debias.py     # separate injury duration from team decision
 uv run python scripts/08_report_html.py       # standalone HTML report with charts
 uv run python scripts/09_sync_report_numbers.py  # sync the Markdown tables to the CSVs
+uv run python scripts/10_data_quality_check.py   # audit the source snapshot for known defects
 ```
+
+[`docs/data_quality.md`](docs/data_quality.md) documents every defect found in
+the source Parquet snapshot and where each is worked around. Read it before
+doing new work against `data/` — in particular, the box score does not record
+absence at all, and the 2021-22 schedule dates are one day early. Script 10 is
+the runnable version of that document.
 
 Findings come in two forms, both generated from the same tables:
 [`reports/injury_duration.html`](reports/injury_duration.html) (self-contained,
