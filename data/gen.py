@@ -1,7 +1,6 @@
-import polars as pl
 import scs_hub
 
-hub = scs_hub.SportsHub(db_con='postgres')
+hub = scs_hub.SportsHub(db_con="postgres")
 df_tables = hub.db.read("""
     select *
     from information_schema.tables
@@ -14,7 +13,5 @@ df_tables = hub.db.read("""
 for row in df_tables.iter_rows(named=True):
     qry = f"select * from {row['table_schema']}.{row['table_name']}"
     df = hub.db.read(qry)
-    df.write_parquet(f'data/{row['table_schema']}/{row['table_name']}.parquet')
+    df.write_parquet(f"data/{row['table_schema']}/{row['table_name']}.parquet")
 print(qry)
-
-
